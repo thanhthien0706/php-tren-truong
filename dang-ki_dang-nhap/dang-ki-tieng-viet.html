@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐĂNG KÝ</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assect/css/css_dang-ki.css">
+    <link rel="stylesheet" href="./assets/icon/fontawesome-free-5.15.3-web/css/all.min.css">
+</head>
+<body>
+    
+    <div id="main" class="">
+        <div ID="main__box" class="" >
+            <div class="box__text-header">
+                <div class="box__text-header-in">
+                  <h1>ĐĂNG KÝ</h1>
+                </div>
+            </div>
+            <div class="box__text-box row" style="margin: auto;">
+              <div class="box__content-chinhsua1 col" >
+                <div class="box__content-chinhsua1-in">
+                  <!-- <h2>THE GIO SO</h2> -->
+                  <h1 style=""><span style="color: #01DF01;">T</span>HẾ <span style="color: #01DF01;">G</span>IỚI <span style="color: #01DF01;">S</span>Ố</h1>
+                  <p>Cộng đồng của người yêu công nghệ</p>
+                </div>
+              </div>
+              <div class="box__content col">
+                
+                <div class="box__content-chinhsua">
+                      <form id="regForm" action="./php_form/dang-ki.php" method="post" class="form__content">
+                      
+                      <div class="box-  in-box ">
+          
+                          <div class="box__content-form tab">
+                              <input  type="text" placeholder="Họ tên" class="edit__the-text" >
+                              <input type="password" placeholder="Mật khẩu"  class="edit__the-text">
+                              <input type="password" placeholder="Nhập lại mật khẩu"  class="edit__the-text">
+                              <div id="datepicker1" class="input-group date" data-date-format="dd-mm-yyyy"> 
+                                  <span class="input-group-addon edit__the-text" style="background: none; border: none; color: white; display: none;" ><i class="fas fa-calendar-week"> </i></i></span> 
+                                  <input class="form-control edit__the-text" readonly="" type="text" style="border: none; box-shadow: none; background: none; height: 40px; color: white;" placeholder="Ngày sinh" > 
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="content__signup">
+                        <div>
+                          <a href="./index.html" style="text-decoration: none;">
+                            <p class="home-page">Trang chủ!</p>
+                          </a>
+                        </div>
+                        <div>
+                          <a href="./dang-nhap-tieng-viet.html" style="text-decoration: none;">
+                            <p>Đăng nhập!</p>
+                          </a>
+                        </div>
+                      </div>
+    
+                      <div class="chua-btn">
+                        <input type="submit" class="btn-check" value="Đăng kí">
+                      </div>
+  
+                  </form>
+                  
+
+                </div>
+              </div>
+            </div>
+            <div class="box__text-footer">
+                <div class="box__text-footer--in">
+                  <p>Thiết kế bởi <span class="coler__text">TLteam</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- bắt dau js cho chuyen dong -->
+    <script>
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+                
+        function showTab(n) {
+          // This function will display the specified tab of the form ...
+          var x = document.getElementsByClassName("tab");
+          x[n].style.display = "block";
+          // ... and fix the Previous/Next buttons:
+          if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+          } else {
+            document.getElementById("prevBtn").style.display = "inline";
+          }
+          if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "OK";
+          } else {
+            document.getElementById("nextBtn").innerHTML.style.display = "none";
+          }
+          // ... and run a function that displays the correct step indicator:
+          fixStepIndicator(n)
+        }
+        
+        function nextPrev(n) {
+          // This function will figure out which tab to display
+          var x = document.getElementsByClassName("tab");
+          // Exit the function if any field in the current tab is invalid:
+          if (n == 1 && !validateForm()) return false;
+          // Hide the current tab:
+          x[currentTab].style.display = "none";
+          // Increase or decrease the current tab by 1: 
+          currentTab = currentTab + n;
+          // if you have reached the end of the form... :
+          if (currentTab >= x.length) {
+            //...the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+          }
+          // Otherwise, display the correct tab:
+          showTab(currentTab);
+        }
+        
+        function validateForm() {
+          // This function deals with validation of the form fields
+          var x, y, i, valid = true;
+          x = document.getElementsByClassName("tab");
+          y = x[currentTab].getElementsByTagName("input");
+          // A loop that checks every input field in the current tab:
+          for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+              // add an "invalid" class to the field:
+              y[i].className += " invalid";
+              // and set the current valid status to false:
+              valid = false;
+            }
+          }
+          // If the valid status is true, mark the step as finished and valid:
+          if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+          }
+          return valid; // return the valid status
+        }
+        
+        function fixStepIndicator(n) {
+          // This function removes the "active" class of all steps...
+          var i, x = document.getElementsByClassName("step");
+          for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+          }
+          //... and adds the "active" class to the current step:
+          x[n].className += " active";
+        }
+    </script>
+
+    <script src="./assect/javascript/js__dk-dn.js"></script>
+
+    <!-- ket thuc chuyen dong -->
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {  
+        $("#datepicker1").datepicker({         
+        autoclose: true,         
+        todayHighlight: true 
+        })
+        // .datepicker('update', new Date());
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {  
+        $("#datepicker2").datepicker({         
+        autoclose: true,         
+        todayHighlight: true 
+        })
+        // .datepicker('update', new Date());
+        });
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+</body>
+</html>
